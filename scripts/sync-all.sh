@@ -26,6 +26,6 @@ if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
   cd ../ &&
   wp "@$TO" db export &&
   wp "@$FROM" db export - | wp "@$TO" db import - &&
-  wp "@$TO" search-replace "$FROMSITE" "$TOSITE" &&
+  wp "@$TO" search-replace "$FROMSITE" "$TOSITE" --skip-columns=guid &&
   rsync -az --progress "$FROMDIR" "$TODIR"
 fi

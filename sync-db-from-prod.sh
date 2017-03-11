@@ -5,7 +5,7 @@ then
     wp @development db reset --yes
     wp @production db export - > sql-dump-production.sql
     wp @development db import sql-dump-production.sql
-    wp @development search-replace https://imagewize.nl http://imagewizenl.dev
+    wp @development search-replace https://imagewize.nl http://imagewizenl.dev --skip-columns=guid
 else
     exit 0
 fi
