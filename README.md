@@ -3,7 +3,7 @@ This is a repository for the Trellis Database and Uploads Folder Synchronisation
 
 ##File location and changes
 Make sure you change the domain in both the shell script and your wp-cli.yaml files. For using the `sync-db-from-prod.sh` script it should be placed in the Wordpress root. For using the `sync-all.sh` it is setup to be run from `site/scripts/`. Or at least it is setup from a subdirectory inside your WordPress root or site folder.
-##Database Sync
+##Database Sync (Production -> Dev)
 The Database sync script `sync-db-from-prod.sh` and aliases setup has been created by **Raquelle**. See [Roots Blog post] (https://roots.io/leveraging-wp-cli-aliases-in-your-wordpress-development-workflow/). It is set up to sync the database from production and update the one on development or on the local server.
 ##Sync All
 The Sync All script `sync-all.sh` which can be used to synchronize the uploads folder and database has been created by **Ben Word** and thread post where he added can be found at [Roots Discourse]( https://discourse.roots.io/t/leveraging-wp-cli-aliases-in-your-wordpress-development-workflow/8414/12) . It will work for synching to and from production to local and to and from staging to local. It is located in the scripts folder, but will work from any sub directory in your WordPress root which often tends to be site witha standard Trellis setup with Bedrock.
