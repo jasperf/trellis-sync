@@ -1,5 +1,5 @@
 # sync-db-from-dev.sh
-read -r -p "Do you solemnly swear that you have had fewer than 2 alcoholic beverages in the last hour and that you would really like to reset your development database and pull the latest from production? [y/N] " response
+read -r -p "Do you solemnly swear that you have had fewer than 2 alcoholic beverages in the last hour and that you would really like to reset your production database and pull the latest from development? [y/N] " response
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]
 then
     wp @production db reset --yes
