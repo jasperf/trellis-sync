@@ -1,7 +1,7 @@
 path: web/wp
 
 @production:
-  ssh: admin@example.com/srv/www/example.com/current
+  ssh: web@example.com/srv/www/example.com/current
 
 @development:
   ssh: vagrant@example.dev/srv/www/example.com/current
