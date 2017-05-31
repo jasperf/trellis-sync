@@ -1,31 +1,39 @@
-#!/bin/sh
+#!/bin/bash
 
 DEVDIR="web/app/uploads/"
-DEVSITE="https://example.dev"
+DEVSITE="example.dev"
 
-PRODDIR="web@example.com:/srv/www/example.com/shared/uploads/"
-PRODSITE="https://example.com"
+PRODDIR="web@example.com:/srv/www/example.com/current/web/app/uploads"
+PRODSITE="example.com"
 
-STAGDIR="web@staging.example.com:/srv/www/example.com/shared/uploads/"
-STAGSITE="https://staging.example.com"
+STAGDIR="web@staging.example.com:/srv/www/example.com/current/web/app/uploads"
+STAGSITE="staging.example.com"
 
 FROM=$1
 TO=$2
 
 case "$1-$2" in
-  development-production) DIR="up";  FROMSITE=$DEVSITE;  FROMDIR=$DEVDIR;  TOSITE=$PRODSITE; TODIR=$PRODDIR; ;;
-  development-staging)    DIR="up"   FROMSITE=$DEVSITE;  FROMDIR=$DEVDIR;  TOSITE=$STAGSITE; TODIR=$STAGDIR; ;;
-  production-development) DIR="down" FROMSITE=$PRODSITE; FROMDIR=$PRODDIR; TOSITE=$DEVSITE;  TODIR=$DEVDIR; ;;
-  staging-development)    DIR="down" FROMSITE=$STAGSITE; FROMDIR=$STAGDIR; TOSITE=$DEVSITE;  TODIR=$DEVDIR; ;;
-  *) echo "usage: $0 development production | development staging | production development | production staging" && exit 1 ;;
+  dev-prod) DIR="up";  FROMSITE=$DEVSITE;  FROMDIR=$DEVDIR;  TOSITE=$PRODSITE; TODIR=$PRODDIR; ;;
+  dev-stage)    DIR="up"   FROMSITE=$DEVSITE;  FROMDIR=$DEVDIR;  TOSITE=$STAGSITE; TODIR=$STAGDIR; ;;
+  prod-dev) DIR="down" FROMSITE=$PRODSITE; FROMDIR=$PRODDIR; TOSITE=$DEVSITE;  TODIR=$DEVDIR; ;;
+  stage-dev)    DIR="down" FROMSITE=$STAGSITE; FROMDIR=$STAGDIR; TOSITE=$DEVSITE;  TODIR=$DEVDIR; ;;
+  *) echo "usage: $0 dev prod | dev stage | prod dev | prod stage" && exit 1 ;;
 esac
 
-read -r -p "Would you really like to reset the $TO database and sync $DIR from $FROM? [y/N] " response
+read -r -p "Reset the $TO database and sync $DIR from $FROM? [y/N] " response
+read -r -p "Sync the uploads folder? [y/N] " uploads
 
+cd ../ &&
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
-  cd ../ &&
-  wp "@$TO" db export &&
-  wp "@$FROM" db export - | wp "@$TO" db import - &&
-  wp "@$TO" search-replace "$FROMSITE" "$TOSITE" --skip-columns=guid &&
+  wp "@$TO" db export $TO-backup.sql &&
+  wp "@$TO" db reset --yes &&
+  wp "@$FROM" db export $FROM-backup.sql &&
+  if $(wp "@$FROM" core is-installed --network); then
+    wp "@$FROM" search-replace --url=$FROMSITE $FROMSITE $TOSITE --recurse-objects --skip-columns=guid --network --export | wp "@$TO" db import -   
+  else
+    wp "@$FROM" search-replace --url=$FROMSITE $FROMSITE $TOSITE --recurse-objects --skip-columns=guid --export | wp "@$TO" db import - 
+  fi
+fi
+if [[ "$uploads" =~ ^([yY][eE][sS]|[yY])$ ]]; then
   rsync -az --progress "$FROMDIR" "$TODIR"
 fi
