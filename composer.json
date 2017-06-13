@@ -4,7 +4,7 @@
     "description": "Synchronization Tool for Trellis",
     "keywords": ["sync","backup", "wp-cli"],
     "homepage": "https://github.com/jasperf/trellis-sync",
-    "license": "MIT",
+    "license": "Apache 2.0",
     "authors": [
         {
             "name": "Jasper Frumau",
