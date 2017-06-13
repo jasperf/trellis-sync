@@ -1,7 +1,7 @@
 {
     "name": "trellis-sync/trellis-sync",
     "type": "script",
-    "description": "Syncronizing Tool for Trellis",
+    "description": "Synchronization Tool for Trellis",
     "keywords": ["sync","backup", "wp-cli"],
     "homepage": "https://github.com/jasperf/trellis-sync",
     "license": "MIT",
