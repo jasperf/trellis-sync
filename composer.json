@@ -1,0 +1,24 @@
+{
+    "name": "trellis-sync/trellis-sync",
+    "type": "script",
+    "description": "Syncronizing Tool for Trellis",
+    "keywords": ["sync","backup", "wp-cli"],
+    "homepage": "https://github.com/jasperf/trellis-sync",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jasper Frumau",
+            "email": "jasper@imagewize.com",
+            "homepage": "https://imagewize.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Trellis Sync": "src"
+        }
+    }
+}
