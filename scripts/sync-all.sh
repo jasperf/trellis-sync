@@ -35,5 +35,11 @@ if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
   fi
 fi
 if [[ "$uploads" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+  if [[ $FROMSITE === $PRODSITE || $FROMSITE === $STAGSITE ]]; then
+    ssh -l $TARGET_USER -A -R localhost:22:$TOSITE:22 \
+    $SOURCE_USER@$FROMSITE "rsync -a 'ssh -p 22' -vuar $FROMDIR \
+    $TARGET_USER@localhost:$TODIR"
+  else
   rsync -az --progress "$FROMDIR" "$TODIR"
+  fi
 fi
