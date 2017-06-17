@@ -9,6 +9,9 @@ PRODSITE="example.com"
 STAGDIR="web@staging.example.com:/srv/www/example.com/current/web/app/uploads"
 STAGSITE="staging.example.com"
 
+SOURCE_USER=
+TARGET_USER="admin"
+
 FROM=$1
 TO=$2
 
