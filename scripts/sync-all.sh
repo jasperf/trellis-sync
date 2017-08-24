@@ -3,10 +3,10 @@
 DEVDIR="web/app/uploads/"
 DEVSITE="example.dev"
 
-PRODDIR="web@example.com:/srv/www/example.com/current/web/app/uploads"
+PRODDIR="web@example.com:/srv/www/example.com/current/web/app/uploads/"
 PRODSITE="example.com"
 
-STAGDIR="web@staging.example.com:/srv/www/example.com/current/web/app/uploads"
+STAGDIR="web@staging.example.com:/srv/www/example.com/current/web/app/uploads/"
 STAGSITE="staging.example.com"
 
 FROM=$1
