@@ -3,7 +3,7 @@ read -r -p "Do you solemnly swear that you have had fewer than 2 alcoholic bever
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]
 then
     wp @development db reset --yes
-    wp @production db export - > sql-dump-production.sql
+    wp @production db export -> sql-dump-production.sql
     wp @development db import sql-dump-production.sql
     wp @development search-replace https://imagewize.nl http://imagewizenl.dev --skip-columns=guid
 else
