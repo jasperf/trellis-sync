@@ -29,9 +29,9 @@ if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
   wp "@$TO" db reset --yes &&
   wp "@$FROM" db export $FROM-backup.sql &&
   if $(wp "@$FROM" core is-installed --network); then
-    wp "@$FROM" search-replace --url=$FROMSITE $FROMSITE $TOSITE --recurse-objects --skip-columns=guid --network --export | wp "@$TO" db import -   
+    wp "@$FROM" search-replace --url=$FROMSITE $FROMSITE $TOSITE --skip-columns=guid --network --export | wp "@$TO" db import -   
   else
-    wp "@$FROM" search-replace --url=$FROMSITE $FROMSITE $TOSITE --recurse-objects --skip-columns=guid --export | wp "@$TO" db import - 
+    wp "@$FROM" search-replace --url=$FROMSITE $FROMSITE $TOSITE --skip-columns=guid --export | wp "@$TO" db import - 
   fi
 fi
 if [[ "$uploads" =~ ^([yY][eE][sS]|[yY])$ ]]; then
