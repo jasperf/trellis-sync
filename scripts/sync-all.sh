@@ -35,5 +35,5 @@ if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
   fi
 fi
 if [[ "$uploads" =~ ^([yY][eE][sS]|[yY])$ ]]; then
-  rsync -az --progress "$FROMDIR" "$TODIR"
+  rsync -L -az --progress "$FROMDIR" "$TODIR"
 fi
