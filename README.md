@@ -1,4 +1,29 @@
 # Trellis Sync
+
+> ## ⚠️ Superseded by [wp-ops](https://github.com/imagewize/wp-ops)
+>
+> These scripts still work, but this repo has not been updated since 2018 and is no
+> longer maintained. Everything it does is now built into
+> **[wp-ops](https://github.com/imagewize/wp-ops)** — a maintained CLI for
+> WordPress and Trellis operations:
+>
+> ```bash
+> brew install imagewize/tap/wp-ops
+>
+> wp-ops db-pull    example.com production   # database, with URL search-replace
+> wp-ops files-pull example.com production   # uploads folder, via rsync
+> ```
+>
+> No editing hardcoded domains into a shell script, and no copying files into your
+> WordPress root — sites are read from your `wordpress_sites.yml`. Alongside the
+> sync commands it covers backups, log monitoring, security scanning, image
+> conversion and SEO audits, and ships an MCP server so the same commands are
+> callable from an AI coding agent.
+>
+> The original scripts are still here, and documented below, for reference.
+
+---
+
 This is a repository for the Trellis Database and Uploads Folder Synchronisation scripts and WP CLI Aliases. Two scripts have been added here. The database backup script or `sync-db-from-prod.sh` to synch the production database with the one on the local server and `sync-all.sh` to synchronize both the database and uploads folder.
 
 ## File location and changes
